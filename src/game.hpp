@@ -17,6 +17,8 @@ class Game{
     void initWindow();
     void initPlayer();
 
+    void evalKeyPressed(sf::Event& event);
+
     public:
     // Constructor / Destructor
 

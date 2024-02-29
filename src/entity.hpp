@@ -29,6 +29,7 @@ class Entity{
 
     void setPosition(sf::Vector2f position);
     void move(sf::Vector2f movement);
+    void rotate(float angle);
 };
 
 #endif

@@ -15,6 +15,20 @@ void Game::initWindow() {
 
 void Game::initPlayer() {
     this->m_player = Entity(40.F, sf::Color::Blue);
+    this->m_player.setPosition({100.F, 100.F});
+}
+
+void Game::evalKeyPressed(sf::Event& event) {
+    switch(event.key.code) {
+        case sf::Keyboard::Escape:
+        this->m_window->close();
+        break;
+        case sf::Keyboard::A:
+        this->m_player.rotate(10);
+        break;
+        default:
+        break;  
+    }
 }
 
 // Constructor / Destructor
@@ -52,9 +66,7 @@ void Game::pollEvents() {
     if(this->m_window->pollEvent(this->m_event)) {
         switch(this->m_event.type) {
             case sf::Event::KeyPressed:
-            if(this->m_event.key.code == sf::Keyboard::Escape) {
-            this->m_window->close();
-            }
+            this->evalKeyPressed(this->m_event);
             break;
             default:
             break;

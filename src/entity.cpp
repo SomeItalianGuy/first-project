@@ -39,3 +39,7 @@ void Entity::setPosition(sf::Vector2f position) {
 void Entity::move(sf::Vector2f movement) {
     this->m_shape.move(movement);
 }
+
+void Entity::rotate(float angle) {
+    this->m_shape.rotate(angle);
+}

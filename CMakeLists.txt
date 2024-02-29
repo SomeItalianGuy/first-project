@@ -6,7 +6,7 @@ project(${MY_PROJECT_NAME})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../out)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-set(SRC_FILES src/main.cpp src/game.cpp)
+set(SRC_FILES src/main.cpp src/game.cpp src/entity.cpp)
 
 add_executable(${MY_PROJECT_NAME} ${SRC_FILES})
 
