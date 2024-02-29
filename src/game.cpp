@@ -63,7 +63,7 @@ bool Game::isRunning() {
     - Close -> Closes the window
 */
 void Game::pollEvents() {
-    if(this->m_window->pollEvent(this->m_event)) {
+    while(this->m_window->pollEvent(this->m_event)) {
         switch(this->m_event.type) {
             case sf::Event::KeyPressed:
             this->evalKeyPressed(this->m_event);
