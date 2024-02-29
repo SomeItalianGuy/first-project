@@ -42,4 +42,7 @@ void Entity::move(sf::Vector2f movement) {
 
 void Entity::rotate(float angle) {
     this->m_shape.rotate(angle);
+    float xOffset = this->m_shape.getRadius() * 0.7 * cos(angle / 180 * 3.14);
+    float yOffset = - this->m_shape.getRadius() * 0.5 * sin(angle / 180 * 3.14);
+    this->m_shape.move(xOffset, yOffset);
 }
