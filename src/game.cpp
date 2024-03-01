@@ -24,6 +24,8 @@ void Game::evalKeyPressed(sf::Event& event) {
       break;
     case sf::Keyboard::A:
       this->m_player.rotate(10);
+        std::cout << "X Center: " << this->m_playerCoords.x
+            << " Y Center: " << this->m_playerCoords.y << '\n';
       break;
     default:
       break;
@@ -90,9 +92,6 @@ void Game::render() {
   this->m_window->clear(sf::Color::Black);
 
   this->m_window->draw(this->m_player.getShape());
-
-  std::cout << "X Center: " << this->m_playerCoords.x
-            << " Y Center: " << this->m_playerCoords.y << '\n';
 
   this->m_window->display();
 }
