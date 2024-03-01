@@ -4,33 +4,34 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
+class Entity {
+ private:
+  // Static private
 
-class Entity{
-    private:
-    // Static private
+  static int numberOfSides;
 
-    static int numberOfSides;
+  // Private variables
 
-    // Private variables
+  sf::CircleShape m_shape;
 
-    sf::CircleShape m_shape;
-    public:
-    // Constructor / Destructor
+ public:
+  // Constructor / Destructor
 
-    Entity();
-    Entity(float radius, sf::Color color);
+  Entity();
+  Entity(float radius, sf::Color color);
 
-    // Public methods
+  // Public methods
 
-    // Getters
+  // Getters
 
-    sf::CircleShape getShape() const;
+  sf::CircleShape getShape() const;
+  sf::Vector2f getCenterCoords() const;
 
-    // Setters
+  // Setters
 
-    void setPosition(sf::Vector2f position);
-    void move(sf::Vector2f movement);
-    void rotate(float angle);
+  void setPosition(sf::Vector2f position);
+  void move(sf::Vector2f movement);
+  void rotate(float angle);
 };
 
 #endif

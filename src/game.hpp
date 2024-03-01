@@ -1,37 +1,40 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include <iostream>
+
 #include "entity.hpp"
 
+class Game {
+ private:
+  // Private variables
 
-class Game{
-    private:
-    // Private variables
+  sf::RenderWindow* m_window;
+  sf::Event m_event;
+  Entity m_player;
 
-    sf::RenderWindow* m_window;
-    sf::Event m_event;
-    Entity m_player;
+  sf::Vector2f m_playerCoords;
 
-    // Private methods
+  // Private methods
 
-    void initWindow();
-    void initPlayer();
+  void initWindow();
+  void initPlayer();
 
-    void evalKeyPressed(sf::Event& event);
+  void evalKeyPressed(sf::Event& event);
 
-    public:
-    // Constructor / Destructor
+ public:
+  // Constructor / Destructor
 
-    Game();
-    
-    ~Game();
+  Game();
 
-    // Public methods
+  ~Game();
 
-    bool isRunning();
-    void pollEvents();
-    void update();
-    void render();
+  // Public methods
+
+  bool isRunning();
+  void pollEvents();
+  void update();
+  void render();
 };
 
 #endif
