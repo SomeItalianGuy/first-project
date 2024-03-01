@@ -2,7 +2,7 @@
 #define ENTITY_HPP
 
 #include <SFML/Graphics.hpp>
-#include <cmath>
+#include "util.hpp"
 
 class Entity {
  private:

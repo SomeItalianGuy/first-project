@@ -14,7 +14,7 @@ Entity::Entity() {}
 /*
     Sets the radius of the entity as well as the color and the number of sides,
    which is 3 for every entity, the position is set by default at (0,0), it can
-   be chan
+   be changed with the move method
 */
 Entity::Entity(float radius, sf::Color color) {
   this->m_shape.setRadius(radius);
@@ -37,11 +37,11 @@ sf::Vector2f Entity::getCenterCoords() const {
 
   xCenterCoords = this->m_shape.getPosition().x +
                   this->m_shape.getRadius() * 1.4 *
-                      cos(M_PI_4 - (this->m_shape.getRotation() / 180 * M_PI));
+                      sin(M_PI_4 - util::degsToRads(this->m_shape.getRotation()));
 
   yCenterCoords = this->m_shape.getPosition().y +
                   this->m_shape.getRadius() * 1.4 *
-                      sin(M_PI_4 - (this->m_shape.getRotation() / 180 * M_PI));
+                      cos(M_PI_4 - util::degsToRads(this->m_shape.getRotation()));
 
   return {xCenterCoords, yCenterCoords};
 }
