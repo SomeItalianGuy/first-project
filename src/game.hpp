@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "entity.hpp"
+#include "player.hpp"
 
 class Game {
  private:
@@ -11,16 +11,12 @@ class Game {
 
   sf::RenderWindow* m_window;
   sf::Event m_event;
-  Entity m_player;
-
-  sf::Vector2f m_playerCoords;
+  Player* m_player;
 
   // Private methods
 
   void initWindow();
   void initPlayer();
-
-  void evalKeyPressed(sf::Event& event);
 
  public:
   // Constructor / Destructor

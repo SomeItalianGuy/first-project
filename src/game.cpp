@@ -12,24 +12,14 @@ void Game::initWindow() {
   this->m_window->setFramerateLimit(60);
 }
 
+/*
+  Initializes player with:
+  - Radius of 40
+  - Blue color
+*/
 void Game::initPlayer() {
-  this->m_player = Entity(40.F, sf::Color::Blue);
-  this->m_player.setPosition({100.F, 100.F});
-}
-
-void Game::evalKeyPressed(sf::Event& event) {
-  switch (event.key.code) {
-    case sf::Keyboard::Escape:
-      this->m_window->close();
-      break;
-    case sf::Keyboard::A:
-      this->m_player.rotate(10);
-        std::cout << "X Center: " << this->m_playerCoords.x
-            << " Y Center: " << this->m_playerCoords.y << '\n';
-      break;
-    default:
-      break;
-  }
+  this->m_player = new Player(40.F, sf::Color::Blue);
+  this->m_player->setPosition({100.F, 100.F});
 }
 
 // Constructor / Destructor
@@ -37,6 +27,7 @@ void Game::evalKeyPressed(sf::Event& event) {
 /*
     Initializes:
     - Window
+    -Player
 */
 Game::Game() {
   this->initWindow();
@@ -44,9 +35,12 @@ Game::Game() {
 }
 
 /*
-    Does nothing
+    Deallocate the memory for the window and player pointers
 */
-Game::~Game() { delete this->m_window; }
+Game::~Game() {
+  delete this->m_window;
+  delete this->m_player;
+}
 
 // Public methods
 
@@ -56,42 +50,34 @@ Game::~Game() { delete this->m_window; }
 bool Game::isRunning() { return this->m_window->isOpen(); }
 
 /*
-    The current accepted events are:
-    - Close -> Closes the window
+    Polls events from window and passes them to every eventListener
 */
 void Game::pollEvents() {
   while (this->m_window->pollEvent(this->m_event)) {
-    switch (this->m_event.type) {
-      case sf::Event::KeyPressed:
-        this->evalKeyPressed(this->m_event);
-        break;
-      default:
-        break;
+    if (this->m_event.key.code == sf::Keyboard::Escape) {
+      this->m_window->close();
+    } else {
+      this->m_player->consumeEvent(this->m_event);
     }
   }
 }
 
 /*
-    This function:
+    This method:
     - polls the events
-
-    Then updates:
-    - player status
 */
-void Game::update() {
-  this->pollEvents();
-  this->m_playerCoords = this->m_player.getCenterCoords();
-}
+void Game::update() { this->pollEvents(); }
 
 /*
-    This function:
+    This method:
     - clears the frame
+    - draws the player
     - displays
 */
 void Game::render() {
   this->m_window->clear(sf::Color::Black);
 
-  this->m_window->draw(this->m_player.getShape());
+  this->m_window->draw(*this->m_player->m_shape);
 
   this->m_window->display();
 }
