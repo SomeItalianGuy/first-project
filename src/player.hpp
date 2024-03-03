@@ -4,36 +4,39 @@
 #include "eventListener.hpp"
 #include "util.hpp"
 
+#define DEFAULT_MOVEMENT 8.F
+
 class Player : public EventListener {
  private:
   // Static private
 
   static int numberOfSides;
 
-  // Private variables
+  // Private methods
+
+  void setOriginAtCenter();
+  void evalKeyPressed(sf::Keyboard::Key keyPressed);
 
  public:
   // Constructor / Destructor
 
   Player();
   Player(float radius, sf::Color color);
+  ~Player();
 
   // Public methods
 
   // Getters
 
   sf::CircleShape getShape() const;
-  sf::Vector2f getCenterCoords() const;
 
   // Setters
 
   void setPosition(sf::Vector2f position);
-  void setOriginAtCenter();
 
   // Misc
 
-  void move(sf::Vector2f movement);
-  void rotate(float angle);
+  void consumeEvent(sf::Event& event) override;
 };
 
 #endif
