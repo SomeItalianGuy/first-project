@@ -17,6 +17,27 @@ class Vector{
     public:
     // Constructor / Destructor
     
+    Vector();
+    Vector(Vector const& other);
+
+    // Public methods
+
+
+    // Operators
+
+    Vector<T, size> operator+(Vector<T, size> const& other);
+    Vector<T, size> operator-(Vector<T, size> const& other);
+    template<class Scalar, class = std::enable_if_t<std::is_arithmetic<Scalar>>>
+    Vector<T, size> operator*(Vector<T, size> const& other);
+
+    template<class Scalar, class = std::enable_if_t<std::is_arithmetic<Scalar>>>
+    Vector<T, size> operator/(Vector<T, size> const& other);
+
+    Vector<T, size> operator=(Vector<T, size> const& other);
+    void operator+=(Vector<T, size> const& other);
+    void operator-=(Vector<T, size> const& other);
+    bool operator==(Vector<T, size> const& other);
+    bool operator!=(Vector<T, size> const& other);
 };
 }
 #endif
