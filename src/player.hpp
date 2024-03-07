@@ -3,6 +3,7 @@
 
 #include "eventListener.hpp"
 #include "util.hpp"
+#include "vector.hpp"
 
 #define DEFAULT_MOVEMENT 8.F
 

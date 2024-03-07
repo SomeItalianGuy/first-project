@@ -3,8 +3,9 @@
 
 #include <array>
 #include <type_traits>
+#include <cmath>
+#include <cassert>
 
-namespace logic{
 
 template <class T, std::size_t size>
 class GenericVector{ 
@@ -18,27 +19,43 @@ class GenericVector{
     // Constructor / Destructor
     
     GenericVector();
-    GenericVector(GenericVector const& other);
+    GenericVector(GenericVector<T, size> const& other);
 
     // Public methods
 
-    T modulus();
+    template<class Scalar, class = std::enable_if_t<std::is_arithmetic<Scalar>::value>>
+    Scalar modulus();
+
+    GenericVector<T, size>& normalize();
+
+    GenericVector<T, size> normalized() const;
 
     // Operators
 
-    GenericVector<T, size> operator+(GenericVector<T, size> const& other);
-    GenericVector<T, size> operator-(GenericVector<T, size> const& other);
-    template<class Scalar, class = std::enable_if_t<std::is_arithmetic<Scalar>>>
-    GenericVector<T, size> operator*(GenericVector<T, size> const& other);
+    GenericVector<T, size> operator+(GenericVector<T, size> const& other) const;
+    GenericVector<T, size> operator-(GenericVector<T, size> const& other) const;
 
-    template<class Scalar, class = std::enable_if_t<std::is_arithmetic<Scalar>>>
-    GenericVector<T, size> operator/(GenericVector<T, size> const& other);
-
-    GenericVector<T, size> operator=(GenericVector<T, size> const& other);
-    void operator+=(GenericVector<T, size> const& other);
-    void operator-=(GenericVector<T, size> const& other);
+    GenericVector<T, size>& operator=(GenericVector<T, size> const& other);
+    GenericVector<T, size>& operator+=(GenericVector<T, size> const& other);
+    GenericVector<T, size>& operator-=(GenericVector<T, size> const& other);
+    template<class Scalar, class = std::enable_if_t<std::is_arithmetic_v<Scalar>>>
+    GenericVector<T, size>& operator*=(Scalar scalar);
+    template<class Scalar, class = std::enable_if_t<std::is_arithmetic_v<Scalar>>>
+    GenericVector<T, size>& operator/=(Scalar scalar);
     bool operator==(GenericVector<T, size> const& other);
     bool operator!=(GenericVector<T, size> const& other);
+
+    // Data operators
+
+    T& operator[](std::size_t i);
+    T const& operator[](std::size_t i) const;
 };
-}
+
+    template<std::size_t size, class T, class Scalar, class>
+    inline GenericVector<T, size> operator*(GenericVector<T, size> const& vec, Scalar scalar);
+    template<std::size_t size, class T, class Scalar, class>
+    inline GenericVector<T, size> operator*(Scalar scalar, GenericVector<T, size> const& vec);
+    template<std::size_t size, class T, class Scalar, class>
+    inline GenericVector<T, size> operator/(GenericVector<T, size> const& vec, Scalar scalar);
+    
 #endif
