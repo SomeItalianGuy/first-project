@@ -57,5 +57,8 @@ class GenericVector{
     inline GenericVector<T, size> operator*(Scalar scalar, GenericVector<T, size> const& vec);
     template<std::size_t size, class T, class Scalar, class>
     inline GenericVector<T, size> operator/(GenericVector<T, size> const& vec, Scalar scalar);
+
+template<class T>
+class Vector2: public GenericVector<T, 2> {}; 
     
 #endif
