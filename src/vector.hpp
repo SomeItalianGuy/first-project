@@ -64,6 +64,9 @@ inline GenericVector<T, size> operator/(GenericVector<T, size> const& vec,
                                         Scalar scalar);
 
 template <class T>
-class Vector2 : public GenericVector<T, 2> {};
+class Vector2 : public GenericVector<T, 2> {
+ public:
+  Vector2(T x, T y);
+};
 
 #endif
