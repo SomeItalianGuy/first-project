@@ -1,6 +1,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include <SFML/Graphics.hpp>
 #include <array>
 #include <cassert>
 #include <cmath>
@@ -66,7 +67,24 @@ inline GenericVector<T, size> operator/(GenericVector<T, size> const& vec,
 template <class T>
 class Vector2 : public GenericVector<T, 2> {
  public:
+  // Constructor / Destructor
+
   Vector2(T x, T y);
+  Vector2(GenericVector<T, 2> const& vec);
+  Vector2(sf::Vector2<T> const& sfVector);
+
+  Vector2<T>& operator=(sf::Vector2<T> const& sfVector);
+  Vector2<T>& operator=(GenericVector<T, 2> const& vec);
+  Vecotr2<T>& operator()(T x, T y);
+
+  T& x();
+  T const& x();
+  T& y();
+  T const& y();
 };
 
+using Vec2f = Vector2<float>;
+using Vec2i = Vector2<int>;
+using Vec2d = Vector2<double>;
+using Vec2u = Vector2<uint>;
 #endif
