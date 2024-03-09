@@ -3,9 +3,12 @@
 // Contructor / Destructor
 
 template <class T>
+Vector2<T>::Vector2() : GenericVector<T, 2>() {}
+
+template <class T>
 Vector2<T>::Vector2(T x, T y) {
-  this->m_data[0] = x;
-  this->m_data[1] = y;
+  this->x() = x;
+  this->y() = y;
 }
 
 template <class T>
@@ -14,8 +17,8 @@ Vector2<T>::Vector2(GenericVector<T, 2> const& vec)
 
 template <class T>
 Vector2<T>::Vector2(sf::Vector2<T> const& sfVector) {
-  this->m_data[0] = sfVector.x;
-  this->m_data[1] = sfVector.y;
+  this->x() = sfVector.x;
+  this->y() = sfVector.y;
 }
 
 // Public methods
@@ -24,21 +27,30 @@ Vector2<T>::Vector2(sf::Vector2<T> const& sfVector) {
 
 template <class T>
 Vector2<T>& Vector2<T>::operator=(sf::Vector2<T> const& sfVector) {
-  this->m_data[0] = sfVector.x;
-  this->m_data[1] = sfVector.y;
+  this->x() = sfVector.x;
+  this->y() = sfVector.y;
   return *this;
 }
 
 template <class T>
 Vector2<T>& Vector2<T>::operator=(GenericVector<T, 2> const& vec) {
-  this->m_data[0] = vec[0];
-  this->m_data[1] = vec[1];
+  this->x() = vec[0];
+  this->y() = vec[1];
 }
 
 template <class T>
 Vector2<T>& Vector2<T>::operator()(T x, T y) {
-  this->m_data[0] = x;
-  this->m_data[1] = y;
+  this->x() = x;
+  this->y() = y;
+  return *this;
+}
+
+template <class T>
+template <class Scalar, class>
+Vector2<T>& Vector2<T>::operator*=(Scalar scalar) {
+  this->x() *= scalar;
+  this->y() *= scalar;
+
   return *this;
 }
 
@@ -46,22 +58,22 @@ Vector2<T>& Vector2<T>::operator()(T x, T y) {
 
 template <class T>
 T& Vector2<T>::x() {
-  return this->m_data[0];
+  return (*this)[0];
 }
 
 template <class T>
 T const& Vector2<T>::x() const {
-  return this->m_data[0];
+  return (*this)[0];
 }
 
 template <class T>
 T& Vector2<T>::y() {
-  return this->m_data[1];
+  return (*this)[1];
 }
 
 template <class T>
 T const& Vector2<T>::y() const {
-  return this->m_data[1];
+  return (*this)[1];
 }
 
 template <class T>

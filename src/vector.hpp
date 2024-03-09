@@ -71,12 +71,18 @@ class Vector2 : public GenericVector<T, 2> {
  public:
   // Constructor / Destructor
 
+  Vector2();
   Vector2(T x, T y);
   Vector2(GenericVector<T, 2> const& vec);
   Vector2(sf::Vector2<T> const& sfVector);
 
   Vector2<T>& operator=(sf::Vector2<T> const& sfVector);
   Vector2<T>& operator=(GenericVector<T, 2> const& vec);
+
+  template <class Scalar,
+            class = std::enable_if_t<std::is_arithmetic_v<Scalar>>>
+  Vector2<T>& operator*=(Scalar scalar);
+
   Vector2<T>& operator()(T x, T y);
 
   T& x();
@@ -93,4 +99,7 @@ using Vec2f = Vector2<float>;
 using Vec2i = Vector2<int>;
 using Vec2d = Vector2<double>;
 using Vec2u = Vector2<uint>;
+
+#include "genericVector.inl"
+#include "vector2.inl"
 #endif

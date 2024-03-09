@@ -92,7 +92,9 @@ template <class T, std::size_t size>
 GenericVector<T, size>& GenericVector<T, size>::operator=(
     GenericVector<T, size> const& other) {
   if (this != other) {
-    this->m_data[i] = other.m_data[i];
+    for (std::size_t i = 0; i < size; i++) {
+      this->m_data[i] = other.m_data[i];
+    }
   }
   return *this;
 }
@@ -184,7 +186,7 @@ bool GenericVector<T, size>::operator!=(GenericVector<T, size> const& other) {
 */
 template <class T, std::size_t size>
 T& GenericVector<T, size>::operator[](std::size_t i) {
-  assert(i > 0 && i < size);
+  assert(i >= 0 && i < size);
   return this->m_data[i];
 }
 
@@ -195,7 +197,7 @@ T& GenericVector<T, size>::operator[](std::size_t i) {
 */
 template <class T, std::size_t size>
 T const& GenericVector<T, size>::operator[](std::size_t i) const {
-  assert(i > 0 && i < size);
+  assert(i >= 0 && i < size);
   return this->m_data[i];
 }
 
@@ -212,7 +214,7 @@ inline GenericVector<T, size> operator*(GenericVector<T, size> const& vec,
     result[i] = vec[i] * scalar;
   }
 
-  return reuslt;
+  return result;
 }
 
 /*
@@ -228,7 +230,7 @@ inline GenericVector<T, size> operator*(Scalar scalar,
     result[i] = vec[i] * scalar;
   }
 
-  return reuslt;
+  return result;
 }
 
 /*
@@ -246,5 +248,5 @@ inline GenericVector<T, size> operator/(GenericVector<T, size> const& vec,
     result[i] = vec[i] / scalar;
   }
 
-  return reuslt;
+  return result;
 }
