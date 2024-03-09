@@ -81,6 +81,8 @@ class Vector2 : public GenericVector<T, 2> {
   T const& x() const;
   T& y();
   T const& y() const;
+
+  sf::Vector2<T> getsfVector() const;
 };
 
 using Vec2f = Vector2<float>;
