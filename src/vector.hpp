@@ -75,12 +75,12 @@ class Vector2 : public GenericVector<T, 2> {
 
   Vector2<T>& operator=(sf::Vector2<T> const& sfVector);
   Vector2<T>& operator=(GenericVector<T, 2> const& vec);
-  Vecotr2<T>& operator()(T x, T y);
+  Vector2<T>& operator()(T x, T y);
 
   T& x();
-  T const& x();
+  T const& x() const;
   T& y();
-  T const& y();
+  T const& y() const;
 };
 
 using Vec2f = Vector2<float>;
