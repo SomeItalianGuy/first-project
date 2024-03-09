@@ -13,6 +13,7 @@ set(SRC_FILES
     src/util.cpp 
     src/eventListener.cpp
     src/genericVector.inl    
+    src/vector2.inl
 )
 
 add_executable(${MY_PROJECT_NAME} ${SRC_FILES})
