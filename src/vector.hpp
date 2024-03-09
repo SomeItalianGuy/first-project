@@ -7,6 +7,8 @@
 #include <cmath>
 #include <type_traits>
 
+#include "util.hpp"
+
 template <class T, std::size_t size>
 class GenericVector {
   static_assert(size > 0);
@@ -83,6 +85,8 @@ class Vector2 : public GenericVector<T, 2> {
   T const& y() const;
 
   sf::Vector2<T> getsfVector() const;
+
+  float getAngleWithVector(Vector2<T> const& vec);
 };
 
 using Vec2f = Vector2<float>;
