@@ -4,7 +4,7 @@
 #include <cmath>
 
 namespace util {
-    float degsToRads(float angleInDegs); 
+float RadsToDegs(float angleInDegs);
 }
 
 #endif

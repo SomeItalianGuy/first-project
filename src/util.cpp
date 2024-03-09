@@ -1,6 +1,3 @@
 #include "util.hpp"
 
-
-float util::degsToRads(float angleInDegs) {
-    return (angleInDegs / 180 * M_PI);
-}
+float util::RadsToDegs(float angleInDegs) { return (angleInDegs / M_PI * 180); }
