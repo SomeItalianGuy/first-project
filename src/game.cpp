@@ -63,10 +63,21 @@ void Game::pollEvents() {
 }
 
 /*
+  Moves the player and resets the movement vector
+*/
+void Game::updatePlayer() {
+  this->m_player->move();
+  this->m_player->reset();
+}
+
+/*
     This method:
     - polls the events
 */
-void Game::update() { this->pollEvents(); }
+void Game::update() {
+  this->pollEvents();
+  this->updatePlayer();
+}
 
 /*
     This method:

@@ -29,6 +29,7 @@ class Game {
 
   bool isRunning();
   void pollEvents();
+  void updatePlayer();
   void update();
   void render();
 };
