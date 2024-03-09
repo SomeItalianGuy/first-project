@@ -2,11 +2,6 @@
 
 // Static private variables
 
-/*
-    This variable makes sure that the entities are triangles
-*/
-int Player::numberOfSides = 3;
-
 // Private methods
 
 /*
@@ -32,21 +27,30 @@ void Player::setOriginAtCenter() {
 */
 void Player::evalKeyPressed(sf::Keyboard::Key keyPressed) {
   // TODO Solve the continous movement issue
+  bool moved = false;
   switch (keyPressed) {
     case sf::Keyboard::A:
-      this->m_shape->move(-DEFAULT_MOVEMENT, 0.F);
+      this->m_movement += Vec2f(-1, 0);
+      moved = true;
       break;
     case sf::Keyboard::W:
-      this->m_shape->move(0.F, -DEFAULT_MOVEMENT);
+      this->m_movement += Vec2f(0, -1);
+      moved = true;
       break;
     case sf::Keyboard::S:
-      this->m_shape->move(0.F, DEFAULT_MOVEMENT);
+      this->m_movement += Vec2f(0, 1);
+      moved = true;
       break;
     case ::sf::Keyboard::D:
-      this->m_shape->move(DEFAULT_MOVEMENT, 0.F);
+      this->m_movement += Vec2f(1, 0);
+      moved = true;
       break;
     default:
+      // Do nothing
       break;
+  }
+  if (moved) {
+    this->m_movement.normalize();
   }
 }
 
@@ -60,7 +64,7 @@ Player::Player() {}
    be changed with the setPosition method
 */
 Player::Player(float radius, sf::Color color) {
-  this->m_shape = new sf::CircleShape(radius, Player::numberOfSides);
+  this->m_shape = new sf::CircleShape(radius, PLAYER_NUMBER_OF_SIDES);
   this->m_shape->setPosition(0.F, 0.F);
   this->m_shape->setFillColor(color);
   this->setOriginAtCenter();
@@ -92,6 +96,19 @@ void Player::consumeEvent(sf::Event& event) {
       this->evalKeyPressed(event.key.code);
       break;
     default:
+      // Do nothing
       break;
   }
 }
+
+/*
+  moves the player according to the current movement vector
+*/
+void Player::move() {
+  this->m_shape->move((this->m_movement *= DEFAULT_SPEED).getsfVector());
+}
+
+/*
+  Resets Movement vector to (0,0)
+*/
+void Player::reset() { this->m_movement(0, 0); }

@@ -5,13 +5,14 @@
 #include "util.hpp"
 #include "vector.hpp"
 
-#define DEFAULT_MOVEMENT 8.F
+#define DEFAULT_SPEED 8.F
+#define PLAYER_NUMBER_OF_SIDES 3
 
 class Player : public EventListener {
  private:
-  // Static private
+  // Private variables
 
-  static int numberOfSides;
+  Vec2f m_movement;
 
   // Private methods
 
@@ -38,6 +39,8 @@ class Player : public EventListener {
   // Misc
 
   void consumeEvent(sf::Event& event) override;
+  void move();
+  void reset();
 };
 
 #endif
