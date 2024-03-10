@@ -26,31 +26,10 @@ void Player::setOriginAtCenter() {
   - D -> move right
 */
 void Player::evalKeyPressed(sf::Keyboard::Key keyPressed) {
-  // TODO Solve the continous movement issue
-  bool moved = false;
   switch (keyPressed) {
-    case sf::Keyboard::A:
-      this->m_movement += Vec2f(-1, 0);
-      moved = true;
-      break;
-    case sf::Keyboard::W:
-      this->m_movement += Vec2f(0, -1);
-      moved = true;
-      break;
-    case sf::Keyboard::S:
-      this->m_movement += Vec2f(0, 1);
-      moved = true;
-      break;
-    case ::sf::Keyboard::D:
-      this->m_movement += Vec2f(1, 0);
-      moved = true;
-      break;
     default:
       // Do nothing
       break;
-  }
-  if (moved) {
-    this->m_movement.normalize();
   }
 }
 
@@ -105,6 +84,31 @@ void Player::consumeEvent(sf::Event& event) {
   moves the player according to the current movement vector
 */
 void Player::move() {
+  bool moved = false;
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    this->m_movement += Vec2f(-1, 0);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    this->m_movement += Vec2f(1, 0);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    this->m_movement += Vec2f(0, -1);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    this->m_movement += Vec2f(0, 1);
+    moved = true;
+  }
+
+  if (moved && this->m_movement.modulus<float>() != 0) {
+    this->m_movement.normalize();
+  } else {
+    this->m_movement = Vec2f(0, 0);
+  }
+
   this->m_shape->move((this->m_movement *= DEFAULT_SPEED).getsfVector());
 }
 

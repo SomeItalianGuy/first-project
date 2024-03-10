@@ -91,11 +91,10 @@ GenericVector<T, size> GenericVector<T, size>::operator-(
 template <class T, std::size_t size>
 GenericVector<T, size>& GenericVector<T, size>::operator=(
     GenericVector<T, size> const& other) {
-  if (this != other) {
-    for (std::size_t i = 0; i < size; i++) {
-      this->m_data[i] = other.m_data[i];
-    }
+  for (std::size_t i = 0; i < size; i++) {
+    this->m_data[i] = other.m_data[i];
   }
+
   return *this;
 }
 
