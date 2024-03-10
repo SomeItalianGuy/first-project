@@ -113,7 +113,7 @@ void Player::move() {
 }
 
 void Player::rotateTowards(Vec2f const& vec) {
-  // Fix the rotation issues
+  // TODO Fix the rotation issues
   Vec2f position(this->m_shape->getPosition());
   float theta = position.getAngleWithVector(vec);
   this->m_shape->setRotation(theta);
