@@ -36,6 +36,7 @@ template <class T>
 Vector2<T>& Vector2<T>::operator=(GenericVector<T, 2> const& vec) {
   this->x() = vec[0];
   this->y() = vec[1];
+  return *this;
 }
 
 template <class T>
@@ -87,10 +88,10 @@ float Vector2<T>::getAngleWithVector(Vector2<T> const& vec) {
   T yVariation = static_cast<double>(vec.y() - this->y());
 
   if (xVariation == 0 && yVariation < 0) {
-    return 270;
+    return 0.F;
   } else if (xVariation == 0 && yVariation >= 0) {
-    return 90;
+    return 180.F;
   }
 
-  return static_cast<float>(util::RadsToDegs(atan(yVariation / xVariation)));
+  return util::RadsToDegs(static_cast<float>(atan(yVariation / xVariation)));
 }

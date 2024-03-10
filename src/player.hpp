@@ -40,6 +40,7 @@ class Player : public EventListener {
 
   void consumeEvent(sf::Event& event) override;
   void move();
+  void rotateTowards(Vec2f const& vec);
   void reset();
 };
 

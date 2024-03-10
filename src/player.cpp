@@ -20,10 +20,6 @@ void Player::setOriginAtCenter() {
 
 /*
   Accepted Keyboard Events:
-  - W -> move up
-  - A -> move right
-  - S -> move down
-  - D -> move right
 */
 void Player::evalKeyPressed(sf::Keyboard::Key keyPressed) {
   switch (keyPressed) {
@@ -81,38 +77,49 @@ void Player::consumeEvent(sf::Event& event) {
 }
 
 /*
-  moves the player according to the current movement vector
+  moves the player according to the keys:
+  - W -> move up
+  - A -> move right
+  - S -> move down
+  - D -> move right
 */
 void Player::move() {
   bool moved = false;
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-    this->m_movement += Vec2f(-1, 0);
+    this->m_movement += Vec2f(-1.F, 0);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-    this->m_movement += Vec2f(1, 0);
+    this->m_movement += Vec2f(1.F, 0);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    this->m_movement += Vec2f(0, -1);
+    this->m_movement += Vec2f(0, -1.F);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-    this->m_movement += Vec2f(0, 1);
+    this->m_movement += Vec2f(0, 1.F);
     moved = true;
   }
 
-  if (moved && this->m_movement.modulus<float>() != 0) {
+  if (moved && this->m_movement.modulus<float>() != 0.F) {
     this->m_movement.normalize();
   } else {
-    this->m_movement = Vec2f(0, 0);
+    this->m_movement(0.F, 0.F);
   }
 
   this->m_shape->move((this->m_movement *= DEFAULT_SPEED).getsfVector());
 }
 
+void Player::rotateTowards(Vec2f const& vec) {
+  // Fix the rotation issues
+  Vec2f position(this->m_shape->getPosition());
+  float theta = position.getAngleWithVector(vec);
+  this->m_shape->setRotation(theta);
+}
+
 /*
   Resets Movement vector to (0,0)
 */
-void Player::reset() { this->m_movement(0, 0); }
+void Player::reset() { this->m_movement(0.F, 0.F); }

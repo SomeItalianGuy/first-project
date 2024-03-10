@@ -13,6 +13,8 @@ class Game {
   sf::Event m_event;
   Player* m_player;
 
+  Vec2f m_mouseCoords;
+
   // Private methods
 
   void initWindow();
@@ -29,6 +31,7 @@ class Game {
 
   bool isRunning();
   void pollEvents();
+  void updateMouseCoords();
   void updatePlayer();
   void update();
   void render();
