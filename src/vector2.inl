@@ -84,14 +84,8 @@ sf::Vector2<T> Vector2<T>::getsfVector() const {
 
 template <class T>
 float Vector2<T>::getAngleWithVector(Vector2<T> const& vec) {
-  T xVariation = static_cast<double>(vec.x() - this->x());
-  T yVariation = static_cast<double>(vec.y() - this->y());
 
-  if (xVariation == 0 && yVariation < 0) {
-    return 0.F;
-  } else if (xVariation == 0 && yVariation >= 0) {
-    return 180.F;
-  }
+Vector2<T> result = vec - *this;
 
-  return util::RadsToDegs(static_cast<float>(atan(yVariation / xVariation)));
+  return util::RadsToDegs(static_cast<float>(atan2(result.y(), result.x())));
 }

@@ -64,7 +64,6 @@ void Game::pollEvents() {
 
 void Game::updateMouseCoords() {
   // TODO solve the problem for x = 0
-  // Maybe mapPixelToCoords?
   this->m_mouseCoords =
       Vec2f(this->m_window->mapPixelToCoords(sf::Mouse::getPosition()));
 }
@@ -83,8 +82,8 @@ void Game::updatePlayer() {
     - polls the events
 */
 void Game::update() {
-  this->updateMouseCoords();
   this->pollEvents();
+  this->updateMouseCoords();
   this->updatePlayer();
 }
 
